@@ -1,0 +1,22 @@
+class Solution:
+    def topoSort(self, V, edges):
+        # Code here
+        adj=[[] for i in range(V)]
+        indeg=[0]*V
+        for u, v in edges:
+            adj[u].append(v)
+            indeg[v]+=1
+        q=[]
+        for i in range(V):
+            if indeg[i]==0:
+                q.append(i)
+        res=[]
+        while q:
+            node=q.pop(0)
+            res .append(node)
+            for nei in adj[node]:
+                indeg[nei]-=1
+                if indeg[nei]==0:
+                    q.append(nei)
+        return res
+        
