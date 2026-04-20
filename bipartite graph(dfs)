@@ -1,0 +1,23 @@
+class Solution:
+    def isBipartite(self, V, edges):
+        # code here
+        adj=[[] for _ in range(V)]
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+        color=[-1]*V
+        for i  in range(V):
+            if color[i]==-1:
+                if not self.dfs(i,0,adj,color):
+                    return False
+        return True
+    def dfs (self,node,col,adj,color):
+        color[node]=col
+        for neighbor in adj[node]:
+            if color[neighbor]==-1:
+                if not self.dfs(neighbor,1-col,adj,color):
+                    return False
+            elif color[neighbor]==col:
+                return False
+        return True
+                
