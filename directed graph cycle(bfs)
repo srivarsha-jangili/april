@@ -1,0 +1,21 @@
+class Solution:
+    def isCyclic(self, V, edges):
+        # code here
+        adj=[[] for _ in range(V)]
+        indeg=[0]*V
+        for u, v in edges:
+            adj[u].append(v)
+            indeg[v]+=1
+        q=[]
+        for i in range(V):
+            if indeg[i]==0:
+                q.append(i)
+        c=0
+        while q:
+            node=q.pop(0)
+            c+=1
+            for nei in adj[node]:
+                indeg[nei]-=1
+                if indeg [nei]==0:
+                    q.append(nei)
+        return c!=V
